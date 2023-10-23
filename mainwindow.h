@@ -25,6 +25,7 @@ private slots:
     void on_pushButton_open_files_clicked();
     void on_pushButton_prev_clicked();
     void on_pushButton_next_clicked();
+    void onCopyLabelsClicked();
 
     void keyPressEvent(QKeyEvent *);
 
