@@ -32,6 +32,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(new QShortcut(QKeySequence(Qt::Key_Space), this), SIGNAL(activated()), this, SLOT(next_img()));
     connect(new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_D), this), SIGNAL(activated()), this, SLOT(remove_img()));
     connect(new QShortcut(QKeySequence(Qt::Key_Delete), this), SIGNAL(activated()), this, SLOT(remove_img()));
+    QShortcut *shortcutCopy = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_V), this);
+    connect(shortcutCopy, SIGNAL(activated()), this, SLOT(copyPreviousLabels()));
 
     init_table_widget();
 }
@@ -140,6 +142,8 @@ void MainWindow::prev_img(bool bSavePrev)
     goto_img(m_imgIndex - 1);
 }
 
+
+
 void MainWindow::save_label_data()
 {
     if(m_imgList.size() == 0) return;
@@ -204,6 +208,32 @@ void MainWindow::remove_img()
         goto_img(m_imgIndex);
     }
 }
+
+void MainWindow::copyPreviousLabels()
+{
+    int previousIndex = m_imgIndex - 1;
+
+    // Check if there is a previous image and if it has labels
+    if (previousIndex >= 0 && previousIndex < m_imgList.size())
+    {
+        // Copy labels from the previous image to the current image
+        m_labelData[m_imgIndex] = m_labelData[previousIndex];
+
+        // Refresh the UI to display the copied labels
+        ui->label_image->loadLabelData(get_labeling_data(m_imgList.at(m_imgIndex)));
+        ui->label_image->showImage();
+
+        // TODO: Update other UI elements if necessary
+        set_label_progress(m_imgIndex);
+        set_focused_file(m_imgIndex);
+    }
+    else
+    {
+        // Handle case when there are no previous images
+        pjreddie_style_msgBox(QMessageBox::Information, "Information", "No previous image to copy labels from.");
+    }
+}
+
 
 void MainWindow::next_label()
 {

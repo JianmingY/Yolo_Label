@@ -5,6 +5,7 @@
 #include <QWheelEvent>
 #include <QTableWidgetItem>
 #include <QMessageBox>
+#include <QMap>
 
 #include <iostream>
 #include <fstream>
@@ -12,6 +13,15 @@
 namespace Ui {
 class MainWindow;
 }
+
+struct LabelData
+{
+    QString label;
+    double midX;
+    double midY;
+    double width;
+    double height;
+};
 
 class MainWindow : public QMainWindow
 {
@@ -25,7 +35,6 @@ private slots:
     void on_pushButton_open_files_clicked();
     void on_pushButton_prev_clicked();
     void on_pushButton_next_clicked();
-    void onCopyLabelsClicked();
 
     void keyPressEvent(QKeyEvent *);
 
@@ -34,6 +43,7 @@ private slots:
     void save_label_data();
     void clear_label_data();
     void remove_img();
+    void copyPreviousLabels();
 
     void next_label();
     void prev_label();
@@ -61,6 +71,7 @@ private:
 
     void            load_label_list_data(QString);
     QString         get_labeling_data(QString)const;
+    QMap<int, QVector<LabelData>> m_labelData;
 
     void            set_label(const int);
     void            set_label_color(const int , const QColor);

@@ -57,7 +57,7 @@
     </size>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="4" column="0">
+    <item row="3" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout_5">
       <item>
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -232,19 +232,6 @@ border-color: rgb(0, 255, 255);</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-	  <item>
-           <widget class="QPushButton" name="pushButton_copyLabels">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>1</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Copy Labels</string>
             </property>
            </widget>
           </item>
