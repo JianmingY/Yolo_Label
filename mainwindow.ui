@@ -659,5 +659,11 @@ QTableView {
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton_copyLabels</sender>
+   <signal>clicked()</signal>
+   <receiver>LabelHandler::onCopyLabelsClicked</receiver>
+  </connection>
+ </connections>
 </ui>
